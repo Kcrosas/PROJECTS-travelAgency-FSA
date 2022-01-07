@@ -22,7 +22,6 @@ class _App extends Component {
         <div>
           <Switch>
             <Route path="/clients/:id" component={clientView} />
-            <Route path="/trips" component={tripView} />
             <Route path="/" component={scheduler} />
           </Switch>
         </div>
