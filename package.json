@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "babel-loader": "^8.2.3",
     "express": "^4.17.2",
     "pg": "^8.7.1",
     "react-fontawesome": "^1.7.1",
@@ -14,7 +15,6 @@
     "@babel/core": "^7.16.7",
     "@babel/preset-react": "^7.16.7",
     "axios": "^0.24.0",
-    "babel-loader": "^8.2.3",
     "nodemon": "^2.0.15",
     "react": "^17.0.2",
     "react-dom": "^17.0.2"
