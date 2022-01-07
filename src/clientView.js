@@ -34,7 +34,7 @@ class views extends Component {
   render() {
     let id = window.location.hash.slice(-1) * 1;
     const client = this.props.clients.filter((e) => e.id === id);
-
+    const date = new Date().getTime;
     const filtered = this.props.trips.filter((e) => {
       return e.client.id === id;
     });
@@ -45,12 +45,18 @@ class views extends Component {
           {filtered.map((trip) => (
             <li key={trip.id}>
               {trip.destination.name} || {trip.date} || {trip.client.name} ||
+              {trip.purpose} ||
               {trip.id}
               <br />
               <button onClick={() => this.Delay(trip.id)}>
                 Delay by 1 Week
               </button>
-              <button onClick={() => this.Delete(trip.id)}>Delete</button>
+              <button
+                disabled={new Date(trip.date).getTime() > date}
+                onClick={() => this.Delete(trip.id)}
+              >
+                Delete
+              </button>
             </li>
           ))}
         </ul>
