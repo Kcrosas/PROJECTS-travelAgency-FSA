@@ -3,6 +3,17 @@ const app = express();
 const path = require("path");
 const axios = require("axios");
 
+//DATABASE setup
+const Sequelize = require("sequelize");
+const { parse } = require("path");
+const { STRING, DATEONLY, INTEGER, BOOLEAN } = Sequelize;
+let conn = new Sequelize(
+  process.env.DATABASE_URL || "postgres://localhost/trips"
+);
+
+//Server connection
+let PORT = process.env.PORT || 8080;
+
 app.use("/dist", express.static(path.join(__dirname, "dist")));
 app.use("/media", express.static(path.join(__dirname, "media")));
 app.use(express.json());
@@ -140,14 +151,6 @@ app.put("/api/trips/delay7/:id", async (req, res, next) => {
   }
 });
 
-//DATABASE setup
-const Sequelize = require("sequelize");
-const { parse } = require("path");
-const { STRING, DATEONLY, INTEGER, BOOLEAN } = Sequelize;
-let conn = new Sequelize(
-  process.env.DATABASE_URL || "postgres://localhost/trips"
-);
-
 //DATABASE models
 const Client = conn.define("client", {
   name: STRING,
@@ -230,8 +233,6 @@ const syncAndSeed = async () => {
   });
 };
 
-//Server connection
-let PORT = process.env.PORT || 8080;
 const init = async () => {
   try {
     //seed the db
