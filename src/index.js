@@ -5,7 +5,6 @@ import store from "./store";
 import { Provider, connect } from "react-redux";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
 import clientView from "./clientView";
-import tripView from "./tripView";
 import scheduler from "./scheduler";
 
 class _App extends Component {
