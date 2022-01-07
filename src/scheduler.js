@@ -77,10 +77,16 @@ class scheduler extends Component {
         >
           View/Edit Client's Trips
         </button>
-        <p>
-          Configured bottom drop down menus to add a trip OR select a client
-          from the Clients dropdown menu and click on 'View/Edit Client's Trips'
-        </p>
+        <ul>
+          <li>
+            To view trips for a specific client, please select the client below
+            then click on 'View/Edit Client's Trips' (above)
+          </li>
+          <li>
+            To add a trip, please select the appropriate choices below then
+            click on 'Submit Trip' (below)
+          </li>
+        </ul>
 
         <form id="scheduler" onSubmit={this.handleSubmit}>
           <label>Clients*</label>
