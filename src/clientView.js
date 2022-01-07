@@ -7,6 +7,7 @@ class views extends Component {
     super(props);
   }
 
+  //Seven day delay function
   Delay = async (id) => {
     try {
       const delayed = (await axios.put(`/api/trips/delay7/${id}`)).data;
@@ -21,6 +22,7 @@ class views extends Component {
     }
   };
 
+  //Delete function
   Delete = async (id) => {
     try {
       await axios.delete(`/api/trips/${id}`);
@@ -31,9 +33,9 @@ class views extends Component {
   };
 
   render() {
+    //Grab the client id by url
     let id = window.location.hash.slice(-1) * 1;
-    const client = this.props.clients.filter((e) => e.id === id);
-    console.log(client[0]);
+
     const date = new Date().getTime;
     const filtered = this.props.trips.filter((e) => {
       return e.client.id === id;
@@ -55,28 +57,33 @@ class views extends Component {
               <td>Delay Option</td>
               <td>Cancel Trip</td>
             </tr>
-            {filtered.map((trip) => (
-              <tr key={trip.id}>
-                <td>{trip.destination.name}</td>
-                <td>{trip.date}</td>
-                <td>{trip.client.name}</td>
-                <td>{trip.purpose}</td>
-                <td>{trip.id}</td>
-                <td>
-                  <button onClick={() => this.Delay(trip.id)}>
-                    Delay by 1 Week
-                  </button>
-                </td>
-                <td>
-                  <button
-                    disabled={new Date(trip.date).getTime() > date}
-                    onClick={() => this.Delete(trip.id)}
-                  >
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
+            {filtered
+              .sort(
+                (a, b) =>
+                  new Date(a.date).getTime() - new Date(b.date).getTime()
+              )
+              .map((trip) => (
+                <tr key={trip.id}>
+                  <td>{trip.destination.name}</td>
+                  <td>{trip.date}</td>
+                  <td>{trip.client.name}</td>
+                  <td>{trip.purpose}</td>
+                  <td>{trip.id}</td>
+                  <td>
+                    <button onClick={() => this.Delay(trip.id)}>
+                      Delay by 1 Week
+                    </button>
+                  </td>
+                  <td>
+                    <button
+                      disabled={new Date(trip.date).getTime() > date}
+                      onClick={() => this.Delete(trip.id)}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
           </tbody>
         </table>
       </div>
