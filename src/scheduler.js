@@ -67,14 +67,20 @@ class scheduler extends Component {
           <br /> Total Trips: ({trips.length})
         </h1>
         <button
+          id="clientButton"
           onClick={() =>
             this.props.history.push(`/clients/${this.state.clientName}`)
           }
         >
           View/Edit Client's Trips
         </button>
+        <p>
+          Configured bottom drop down menus to add a trip OR select a client
+          from the Clients dropdown menu and click on 'View/Edit Client's Trips'
+        </p>
+
         <form id="scheduler" onSubmit={this.handleSubmit}>
-          <label>Clients</label>
+          <label>Clients*</label>
           <select
             name="client"
             onChange={this.changeClient}
@@ -89,7 +95,7 @@ class scheduler extends Component {
               );
             })}
           </select>
-          <label>Destinations</label>
+          <label>Destinations*</label>
           <select
             name="destination"
             onChange={this.change}
@@ -104,7 +110,7 @@ class scheduler extends Component {
               );
             })}
           </select>
-          <label>Purpose</label>
+          <label>Purpose*</label>
           <select
             name="purpose"
             onChange={this.changePurpose}
@@ -116,7 +122,7 @@ class scheduler extends Component {
             <option value="other">Other</option>
           </select>
 
-          <label>Start date:</label>
+          <label>Start date*</label>
 
           <input
             type="date"
@@ -126,8 +132,9 @@ class scheduler extends Component {
             max="2025-12-31"
             onChange={(event) => this.setState({ date: event.target.value })}
           />
+          <p id="notice">*Denotes required field</p>
           <br />
-          <br />
+
           <button
             type="submit"
             disabled={
@@ -145,7 +152,7 @@ class scheduler extends Component {
 
         <table>
           <tbody>
-            <tr>
+            <tr id="topRow">
               <td>NAME</td>
               <td>DESTINATION</td>
               <td>DATE</td>

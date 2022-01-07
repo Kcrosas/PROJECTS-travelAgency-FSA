@@ -18,10 +18,33 @@ const store = createStore((state = initialState, action) => {
     };
   }
   if (action.type === "NEW_TRIP") {
-    console.log(action + "ACCCTTTIONNNN");
     state = {
       ...state,
       trips: [...state.trips, action.trip],
+    };
+  }
+  if (action.type === "DELETE_TRIP") {
+    state = {
+      ...state,
+      trips: [...state.trips.filter((e) => e.id !== action.id)],
+    };
+  }
+  if (action.type === "DELAYER") {
+    const newTrips = state.trips.slice();
+    newTrips.filter((e) => e.id === action.payload.id);
+    //console.log(newTrips);
+    state = {
+      ...state,
+      trips: [
+        ...state.trips.map((e) => {
+          if (e.id === action.payload.id) {
+            e.date = action.payload.newDate;
+            return e;
+          } else {
+            return e;
+          }
+        }),
+      ],
     };
   }
 
