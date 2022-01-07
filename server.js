@@ -1,5 +1,10 @@
 const express = require("express");
 const app = express();
+
+//Server connection
+let PORT = process.env.PORT || 8080;
+app.listen(PORT, () => console.log(`ACTIVE on ${PORT}`));
+
 const path = require("path");
 const axios = require("axios");
 
@@ -9,9 +14,6 @@ const { STRING, DATEONLY, INTEGER, BOOLEAN } = Sequelize;
 let conn = new Sequelize(
   process.env.DATABASE_URL || "postgres://localhost/trips"
 );
-
-//Server connection
-let PORT = process.env.PORT || 8080;
 
 app.use("/dist", express.static(path.join(__dirname, "dist")));
 app.use("/media", express.static(path.join(__dirname, "media")));
@@ -253,9 +255,6 @@ const init = async () => {
   try {
     //seed the db
     await syncAndSeed();
-    //Port configurations
-
-    app.listen(PORT, () => console.log(`ACTIVE on ${PORT}`));
   } catch (error) {
     console.log(error);
   }
