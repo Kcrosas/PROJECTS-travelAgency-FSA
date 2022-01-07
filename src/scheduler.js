@@ -56,9 +56,12 @@ class scheduler extends Component {
     const { trips, clients, destinations } = this.props;
     const dateToday = new Date().toISOString().slice(0, 10);
     const sevenDays = this.dateCreator(7);
+    const flatCurrent = new Date(this.dateCreator(0)).getTime();
+    console.log("flatcurrent", flatCurrent);
     const seven = trips.filter((e) => {
       let m = new Date(e.date).getTime();
-      return new Date().getTime() <= m && m <= new Date(sevenDays).getTime();
+      console.log("element", m);
+      return flatCurrent <= m <= new Date(sevenDays).getTime();
     });
     return (
       <div>
