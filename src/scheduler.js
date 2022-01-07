@@ -66,7 +66,13 @@ class scheduler extends Component {
           Acme Travel Agency
           <br /> Total Trips: ({trips.length})
         </h1>
-
+        <button
+          onClick={() =>
+            this.props.history.push(`/clients/${this.state.clientName}`)
+          }
+        >
+          View/Edit Client's Trips
+        </button>
         <form id="scheduler" onSubmit={this.handleSubmit}>
           <label>Clients</label>
           <select
@@ -120,6 +126,8 @@ class scheduler extends Component {
             max="2025-12-31"
             onChange={(event) => this.setState({ date: event.target.value })}
           />
+          <br />
+          <br />
           <button
             type="submit"
             disabled={
@@ -132,32 +140,40 @@ class scheduler extends Component {
             Submit Trip
           </button>
         </form>
-        <button
-          onClick={() =>
-            this.props.history.push(`/clients/${this.state.clientName}`)
-          }
-        >
-          View/Edit Client's Trips
-        </button>
+
         <h2>Trips scheduled for the next seven days:</h2>
 
-        <ul>
-          {seven
-            .sort(
-              (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime()
-            )
-            .map((e) => {
-              return (
-                <li key={e.id}>
-                  {e.client.name} | {e.destination.name} | {e.date} |{" "}
-                  {e.purpose}
-                  <button onClick={() => this.delay(e.id)}>
-                    Delay by 1 day
-                  </button>
-                </li>
-              );
-            })}
-        </ul>
+        <table>
+          <tbody>
+            <tr>
+              <td>NAME</td>
+              <td>DESTINATION</td>
+              <td>DATE</td>
+              <td>PURPOSE</td>
+              <td>PUSH BACK?</td>
+            </tr>
+            {seven
+              .sort(
+                (a, b) =>
+                  new Date(a.date).getTime() - new Date(b.date).getTime()
+              )
+              .map((e) => {
+                return (
+                  <tr key={e.id}>
+                    <td>{e.client.name}</td>
+                    <td>{e.destination.name}</td>
+                    <td>{e.date}</td>
+                    <td>{e.purpose}</td>
+                    <td>
+                      <button onClick={() => this.delay(e.id)}>
+                        Delay by 1 day
+                      </button>
+                    </td>
+                  </tr>
+                );
+              })}
+          </tbody>
+        </table>
       </div>
     );
   }

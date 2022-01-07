@@ -5,7 +5,6 @@ const axios = require("axios");
 
 //DATABASE setup
 const Sequelize = require("sequelize");
-const { parse } = require("path");
 const { STRING, DATEONLY, INTEGER, BOOLEAN } = Sequelize;
 let conn = new Sequelize(
   process.env.DATABASE_URL || "postgres://localhost/trips"
@@ -111,7 +110,6 @@ app.post("/api/trips", async (req, res, next) => {
       purpose: purpose,
     });
     const clientTest = (await Client.findByPk(newThing.clientId)).name;
-    console.log("clienadafadfsfsTest" + clientTest);
     const newObject = {
       id: newThing.id,
       client: { name: (await Client.findByPk(newThing.clientId)).name },
@@ -139,6 +137,8 @@ app.put("/api/trips/delay/:id", async (req, res, next) => {
     next(error);
   }
 });
+
+//Delay a trip by seven days
 app.put("/api/trips/delay7/:id", async (req, res, next) => {
   try {
     const tripToDelay = await Trip.findByPk(req.params.id * 1);
@@ -204,6 +204,8 @@ const syncAndSeed = async () => {
   const kennethR = await Client.create({ name: "Kenneth R" });
   const devinB = await Client.create({ name: "Devin B" });
   const camV = await Client.create({ name: "Cam V" });
+  const hein = await Client.create({ name: "Heinnssin P" });
+  const john = await Client.create({ name: "John P" });
   const paris = await Destination.create({ name: "Paris, France" });
   const bali = await Destination.create({ name: "Bali, Indonesia" });
   const rome = await Destination.create({ name: "Rome, Italy" });
@@ -229,6 +231,20 @@ const syncAndSeed = async () => {
       date: dateCreator(e),
       clientId: camV.id,
       destinationId: marrakesh.id,
+    });
+  });
+  mapper.map(async (e) => {
+    await Trip.create({
+      date: dateCreator(e),
+      clientId: hein.id,
+      destinationId: paris.id,
+    });
+  });
+  mapper.map(async (e) => {
+    await Trip.create({
+      date: dateCreator(e),
+      clientId: john.id,
+      destinationId: paris.id,
     });
   });
 };
