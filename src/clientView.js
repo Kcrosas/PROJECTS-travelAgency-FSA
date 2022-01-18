@@ -35,7 +35,7 @@ class views extends Component {
   render() {
     //Grab the client id by url
     let id = window.location.hash.slice(-1) * 1;
-
+    console.log(this.props.trips);
     const date = new Date().getTime;
     const filtered = this.props.trips.filter((e) => {
       return e.client.id === id;

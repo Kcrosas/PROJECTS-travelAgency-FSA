@@ -2,11 +2,10 @@ const express = require("express");
 const app = express();
 
 //Server connection
-let PORT = process.env.PORT || 8080;
+let PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`ACTIVE on ${PORT}`));
 
 const path = require("path");
-const axios = require("axios");
 
 //DATABASE setup
 const Sequelize = require("sequelize");
@@ -105,12 +104,14 @@ app.get("/api/nextseven", async (req, res, next) => {
 app.post("/api/trips", async (req, res, next) => {
   try {
     const { clientName, destinationName, date, purpose } = req.body;
+
     const newThing = await Trip.create({
       clientId: clientName,
       destinationId: destinationName,
       date: date,
       purpose: purpose,
     });
+    console.log(newThing);
     const clientTest = (await Client.findByPk(newThing.clientId)).name;
     const newObject = {
       id: newThing.id,
