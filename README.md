@@ -1,3 +1,3 @@
 This is basic CRUD app utilizing Express, React, and Node.js 
 
-![ScreenShot](/media/Screenshot 2022-06-07 210723.png)
+![ScreenShot](https://raw.githubusercontent.com/Kcrosas/PROJECTS-travelAgency-FSA/main/media/Screenshot%202022-06-07%20210723.png)
