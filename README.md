@@ -8,7 +8,7 @@
 
 ## Description 
 
-Trip Planner is a full-stack application built using React, Redux, and PostgreSQL. It serves as a comprehensive practice project for creating a basic CRUD app that enables users to manage client information and book trips. This application focuses on setting up a robust full-stack architecture, handling data formatting, and providing essential functionalities.
+Travel Agency is a full-stack application built using React, Redux, and PostgreSQL. It serves as a comprehensive practice project for creating a basic CRUD app that enables users to manage client information and book trips. This application focuses on setting up a robust full-stack architecture, handling data formatting, and providing essential functionalities.
 
 ## Features
 Create, Read, Update, and Delete client and trip information
